@@ -38,12 +38,12 @@ public class GlobalExceptionHandler {
                 .badRequest()
                 .body(ErrorResponseDto.from(ErrorCode.INTERNAL_SERVER_ERROR, request.getRequestURI()));
     }
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ErrorResponseDto> handleMaxSizeException(MaxUploadSizeExceededException ex,
-                                                                   HttpServletRequest request) {
-        return ResponseEntity
-                .badRequest()
-                .body(ErrorResponseDto.from(ex, request.getRequestURI()));
-    }
+//    @ExceptionHandler(MaxUploadSizeExceededException.class)
+//    public ResponseEntity<ErrorResponseDto> handleMaxSizeException(MaxUploadSizeExceededException ex,
+//                                                                   HttpServletRequest request) {
+//        return ResponseEntity
+//                .badRequest()
+//                .body(ErrorResponseDto.from(ex, request.getRequestURI()));
+//    }
 
 }
