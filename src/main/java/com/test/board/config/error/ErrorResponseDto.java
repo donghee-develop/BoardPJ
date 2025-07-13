@@ -44,14 +44,14 @@ public class ErrorResponseDto {
                 .fieldErrors(fieldErrors)
                 .build();
     }
-    public static ErrorResponseDto from(MaxUploadSizeExceededException ex, String path) {
-        return ErrorResponseDto.builder()
-                .timestamp(LocalDateTime.now())
-                .status(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().value()) // 413 Payload Too Large
-                .error(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().name())
-                .message(ErrorCode.FILE_SIZE_EXCEEDED.getMessage())
-                .path(path)
-                .fieldErrors(List.of()) // 필드 에러는 없음
-                .build();
-    }
+//    public static ErrorResponseDto from(MaxUploadSizeExceededException ex, String path) {
+//        return ErrorResponseDto.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().value()) // 413 Payload Too Large
+//                .error(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().name())
+//                .message(ErrorCode.FILE_SIZE_EXCEEDED.getMessage())
+//                .path(path)
+//                .fieldErrors(List.of()) // 필드 에러는 없음
+//                .build();
+//    }
 }
