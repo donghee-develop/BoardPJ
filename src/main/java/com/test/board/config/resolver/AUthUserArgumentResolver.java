@@ -1,14 +1,16 @@
 package com.test.board.config.resolver;
 
-import com.test.board.config.auth.RoleUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
+
+import com.test.board.config.auth.RoleUser;
 
 @Component
 public class AUthUserArgumentResolver implements HandlerMethodArgumentResolver {
@@ -17,10 +19,11 @@ public class AUthUserArgumentResolver implements HandlerMethodArgumentResolver {
         return parameter.getParameterAnnotation(RoleUser.class) != null;
     }
 
-    public Object resolveArgument(MethodParameter parameter,
-                                  ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest,
-                                  WebDataBinderFactory binderFactory) {
+    public Object resolveArgument(
+            MethodParameter parameter,
+            ModelAndViewContainer mavContainer,
+            NativeWebRequest webRequest,
+            WebDataBinderFactory binderFactory) {
 
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
         HttpSession session = request.getSession(false);

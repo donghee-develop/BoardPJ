@@ -1,11 +1,15 @@
 package com.test.board.domain.user.entity;
 
+import jakarta.persistence.*;
+
+import lombok.Getter;
+
 import com.test.board.config.BaseEntity;
 import com.test.board.domain.board.entity.Board;
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user_board_roles")
+@Getter
 public class UserBoardRole extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -29,5 +33,4 @@ public class UserBoardRole extends BaseEntity {
 
         return userBoardRole;
     }
-
 }

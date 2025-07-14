@@ -1,8 +1,9 @@
 package com.test.board.domain.board.entity;
 
-import com.test.board.config.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
+import com.test.board.config.BaseEntity;
 
 @Entity
 @Table(name = "boards")
