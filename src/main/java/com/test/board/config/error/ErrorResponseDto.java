@@ -1,13 +1,14 @@
 package com.test.board.config.error;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Getter;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import lombok.Builder;
+import lombok.Getter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Getter
 @Builder
@@ -31,9 +32,13 @@ public class ErrorResponseDto {
     }
 
     public static ErrorResponseDto from(MethodArgumentNotValidException ex, String path) {
-        List<FieldErrorDto> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> new FieldErrorDto(error.getField(), error.getDefaultMessage()))
-                .toList();
+        List<FieldErrorDto> fieldErrors =
+                ex.getBindingResult().getFieldErrors().stream()
+                        .map(
+                                error ->
+                                        new FieldErrorDto(
+                                                error.getField(), error.getDefaultMessage()))
+                        .toList();
 
         return ErrorResponseDto.builder()
                 .timestamp(LocalDateTime.now())
@@ -44,14 +49,15 @@ public class ErrorResponseDto {
                 .fieldErrors(fieldErrors)
                 .build();
     }
-//    public static ErrorResponseDto from(MaxUploadSizeExceededException ex, String path) {
-//        return ErrorResponseDto.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().value()) // 413 Payload Too Large
-//                .error(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().name())
-//                .message(ErrorCode.FILE_SIZE_EXCEEDED.getMessage())
-//                .path(path)
-//                .fieldErrors(List.of()) // 필드 에러는 없음
-//                .build();
-//    }
+    //    public static ErrorResponseDto from(MaxUploadSizeExceededException ex, String path) {
+    //        return ErrorResponseDto.builder()
+    //                .timestamp(LocalDateTime.now())
+    //                .status(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().value()) // 413 Payload Too
+    // Large
+    //                .error(ErrorCode.FILE_SIZE_EXCEEDED.getStatus().name())
+    //                .message(ErrorCode.FILE_SIZE_EXCEEDED.getMessage())
+    //                .path(path)
+    //                .fieldErrors(List.of()) // 필드 에러는 없음
+    //                .build();
+    //    }
 }

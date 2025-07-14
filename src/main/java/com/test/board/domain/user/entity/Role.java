@@ -1,10 +1,14 @@
 package com.test.board.domain.user.entity;
 
-import com.test.board.config.BaseEntity;
 import jakarta.persistence.*;
+
+import lombok.Getter;
+
+import com.test.board.config.BaseEntity;
 
 @Entity
 @Table(name = "roles")
+@Getter
 public class Role extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)

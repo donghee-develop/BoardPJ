@@ -1,15 +1,17 @@
 package com.test.board.domain.user.entity;
 
-import com.test.board.config.BaseEntity;
-import com.test.board.domain.user.dto.request.SignUpUserDto;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.test.board.config.BaseEntity;
+import com.test.board.domain.user.dto.request.SignUpRequestDto;
 
 @Entity
 @Table(name = "users")
@@ -18,8 +20,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class User extends BaseEntity {
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String email;
+
     private String password;
     private String name;
     private String phoneNumber;
@@ -28,20 +31,15 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBoardRole> userRoles = new HashSet<>();
 
-
     private String profileImage;
 
-
-    public static User from(SignUpUserDto dto, String encodedPassword) {
+    public static User from(SignUpRequestDto dto, String encodedPassword) {
         return new User(
                 dto.getEmail(),
                 encodedPassword,
                 dto.getName(),
                 dto.getPhoneNumber(),
                 new HashSet<>(),
-                null
-        );
+                null);
     }
-
 }
-
