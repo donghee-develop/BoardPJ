@@ -10,13 +10,13 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.test.board.config.auth.RoleUser;
+import com.test.board.config.auth.AuthUser;
 
 @Component
 public class AUthUserArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterAnnotation(RoleUser.class) != null;
+        return parameter.getParameterAnnotation(AuthUser.class) != null;
     }
 
     public Object resolveArgument(
@@ -30,6 +30,6 @@ public class AUthUserArgumentResolver implements HandlerMethodArgumentResolver {
 
         if (session == null) return null;
 
-        return session.getAttribute("loginUser");
+        return session.getAttribute("user");
     }
 }

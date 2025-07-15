@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
+import com.test.board.config.auth.AuthUser;
 import com.test.board.config.auth.UserPrincipal;
 import com.test.board.domain.user.dto.request.FindEmailRequestDto;
 import com.test.board.domain.user.dto.request.FindPasswordRequestDto;
@@ -37,8 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<ProfileResponseDto> getMe(HttpSession session) {
-        UserPrincipal userPrincipal = (UserPrincipal) session.getAttribute("user");
+    public ResponseEntity<ProfileResponseDto> getMe(@AuthUser UserPrincipal userPrincipal) {
         ProfileResponseDto dto = userService.getMe(userPrincipal.getId());
         return ResponseEntity.ok(dto);
     }
