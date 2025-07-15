@@ -1,5 +1,7 @@
 package com.test.board.domain.user.service;
 
+import java.util.UUID;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
@@ -11,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 import com.test.board.config.auth.UserPrincipal;
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
+import com.test.board.config.utils.EmailService;
 import com.test.board.domain.user.dto.request.LoginRequestDto;
 import com.test.board.domain.user.dto.request.SignUpRequestDto;
+import com.test.board.domain.user.dto.response.FindEmailResponseDto;
 import com.test.board.domain.user.dto.response.ProfileResponseDto;
 import com.test.board.domain.user.entity.Role;
 import com.test.board.domain.user.entity.User;
@@ -28,6 +32,7 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final UserBoardRoleRepository userBoardRoleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @Transactional
     public void login(LoginRequestDto loginRequestDto, HttpSession session) {
@@ -52,6 +57,9 @@ public class UserService {
         if (userRepository.existsByName(signUpRequestDto.getName())) {
             throw new CustomException(ErrorCode.DUPLICATED_NAME);
         }
+        if (userRepository.existsByPhoneNumber(signUpRequestDto.getPhoneNumber())) {
+            throw new CustomException(ErrorCode.DUPLICATED_PHONE_NUMBER);
+        }
 
         String encodedPassword = passwordEncoder.encode(signUpRequestDto.getPassword());
 
@@ -74,11 +82,29 @@ public class UserService {
                         .findById(id)
                         .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-        return new ProfileResponseDto(
-                user.getEmail(),
-                user.getName(),
-                user.getProfileImage(),
-                user.getPhoneNumber(),
-                user.getCreatedAt());
+        return ProfileResponseDto.from(user);
+    }
+
+    public FindEmailResponseDto findEmailByPhone(String phoneNumber) {
+        User user =
+                userRepository
+                        .findByPhoneNumber(phoneNumber)
+                        .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        return FindEmailResponseDto.from(user.getEmail());
+    }
+
+    public void sendTemporaryPassword(String email) {
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        String tempPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+        String encodedTempPassword = passwordEncoder.encode(tempPassword);
+
+        user.changePassword(encodedTempPassword);
+        userRepository.save(user);
+
+        emailService.sendTemporaryPasswordEmail(email, tempPassword);
     }
 }

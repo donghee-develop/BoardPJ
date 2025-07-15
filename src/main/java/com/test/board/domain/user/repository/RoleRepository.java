@@ -8,4 +8,6 @@ import com.test.board.domain.user.entity.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(Role.Roles roles);
+
+    boolean existsByName(Role.Roles roleEnum);
 }
