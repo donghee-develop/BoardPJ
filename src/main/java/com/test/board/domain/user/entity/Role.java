@@ -14,6 +14,10 @@ public class Role extends BaseEntity {
     @Column(unique = true, nullable = false)
     private Roles name;
 
+    public void updateName(Roles roleEnum) {
+        this.name = roleEnum;
+    }
+
     public enum Roles {
         SUPER_ADMIN,
         SUB_ADMIN,

@@ -42,4 +42,8 @@ public class User extends BaseEntity {
                 new HashSet<>(),
                 null);
     }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }

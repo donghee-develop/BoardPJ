@@ -5,7 +5,7 @@ services:
 
     platform: linux/amd64
     volumes:
-      - board_mysql_volume:/data
+      - board_mysql_volume:/var/lib/mysql
     ports:
       - '3306:3306'
     environment:

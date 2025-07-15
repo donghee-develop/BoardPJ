@@ -15,7 +15,7 @@ public enum ErrorCode {
     DUPLICATED_EMAIL("이미 등록된 이메일입니다.", HttpStatus.CONFLICT),
     DUPLICATED_NAME("이미 존재하는 이름입니다.", HttpStatus.CONFLICT),
     ROLE_NOT_FOUND("해당 권한은 존재하지 않습니다.", HttpStatus.NOT_FOUND),
-
+    DUPLICATED_PHONE_NUMBER("이미 가입된 휴대폰 번호입니다.", HttpStatus.CONFLICT),
     SAME_PASSWORD("이전 비밀번호와 동일한 비밀번호로 변경할 수 없습니다.", HttpStatus.BAD_REQUEST),
     EMPTY_PROFILE_IMAGE("프로필 이미지가 비어 있습니다!", HttpStatus.BAD_REQUEST),
     IMAGE_SAVE_FAIL("이미지 저장에 실패 했습니다!", HttpStatus.INTERNAL_SERVER_ERROR),
