@@ -5,12 +5,12 @@ import java.util.Set;
 
 import jakarta.persistence.*;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLRestriction;
 
-import com.test.board.config.BaseEntity;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import com.test.board.config.SoftDeletableEntity;
 import com.test.board.domain.user.dto.request.SignUpRequestDto;
 
 @Entity
@@ -18,7 +18,9 @@ import com.test.board.domain.user.dto.request.SignUpRequestDto;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User extends BaseEntity {
+@SuperBuilder
+@SQLRestriction("deleted = false")
+public class User extends SoftDeletableEntity {
 
     @Column(nullable = false)
     private String email;
@@ -45,5 +47,10 @@ public class User extends BaseEntity {
 
     public void changePassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void addUserBoardRole(UserBoardRole role) {
+        if (userRoles == null) userRoles = new HashSet<>();
+        userRoles.add(role);
     }
 }
