@@ -2,7 +2,6 @@ package com.test.board.domain.user.service;
 
 import java.util.UUID;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import com.test.board.config.auth.UserPrincipal;
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
 import com.test.board.config.utils.EmailService;
-import com.test.board.domain.user.dto.request.LoginRequestDto;
 import com.test.board.domain.user.dto.request.SignUpRequestDto;
 import com.test.board.domain.user.dto.response.FindEmailResponseDto;
 import com.test.board.domain.user.dto.response.ProfileResponseDto;
@@ -33,20 +30,6 @@ public class UserService {
     private final UserBoardRoleRepository userBoardRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
-
-    @Transactional
-    public void login(LoginRequestDto loginRequestDto, HttpSession session) {
-        User user =
-                userRepository
-                        .findByEmail(loginRequestDto.getEmail())
-                        .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-        if (!passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())) {
-            throw new CustomException(ErrorCode.PASSWORD_MISMATCH);
-        }
-        UserPrincipal userPrincipal = UserPrincipal.from(user);
-        session.setAttribute("user", userPrincipal);
-    }
 
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {

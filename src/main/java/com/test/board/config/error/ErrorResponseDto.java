@@ -21,7 +21,7 @@ public class ErrorResponseDto {
     private String path;
     private List<FieldErrorDto> fieldErrors;
 
-    public static ErrorResponseDto from(ErrorCode errorCode, String path) {
+    public static ErrorResponseDto fromErrorCode(ErrorCode errorCode, String path) {
         return ErrorResponseDto.builder()
                 .timestamp(LocalDateTime.now())
                 .status(errorCode.getStatus().value())
@@ -31,7 +31,8 @@ public class ErrorResponseDto {
                 .build();
     }
 
-    public static ErrorResponseDto from(MethodArgumentNotValidException ex, String path) {
+    public static ErrorResponseDto fromValidationException(
+            MethodArgumentNotValidException ex, String path) {
         List<FieldErrorDto> fieldErrors =
                 ex.getBindingResult().getFieldErrors().stream()
                         .map(
@@ -49,6 +50,17 @@ public class ErrorResponseDto {
                 .fieldErrors(fieldErrors)
                 .build();
     }
+
+    public static ErrorResponseDto fromUnexpectedException(Exception ex, String path) {
+        return ErrorResponseDto.builder()
+                .timestamp(LocalDateTime.now())
+                .status(500)
+                .error("INTERNAL_SERVER_ERROR")
+                .message("서버 내부 오류가 발생했습니다.")
+                .path(path)
+                .build();
+    }
+
     //    public static ErrorResponseDto from(MaxUploadSizeExceededException ex, String path) {
     //        return ErrorResponseDto.builder()
     //                .timestamp(LocalDateTime.now())

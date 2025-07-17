@@ -29,7 +29,7 @@ public class UserBoardRole extends BaseEntity {
         userBoardRole.board = board;
         userBoardRole.role = role;
 
-        user.getUserRoles().add(userBoardRole);
+        user.addUserBoardRole(userBoardRole);
 
         return userBoardRole;
     }
