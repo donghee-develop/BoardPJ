@@ -1,4 +1,4 @@
-package com.test.board.config.auth.controller;
+package com.test.board.domain.auth.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-import com.test.board.config.auth.UserPrincipal;
-import com.test.board.config.auth.dto.request.LoginRequestDto;
-import com.test.board.config.auth.service.AuthService;
+import com.test.board.domain.auth.UserPrincipal;
+import com.test.board.domain.auth.dto.request.LoginRequestDto;
+import com.test.board.domain.auth.service.AuthService;
 import com.test.board.domain.user.repository.UserRepository;
 
 @RequiredArgsConstructor

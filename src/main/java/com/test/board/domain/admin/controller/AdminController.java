@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
-import com.test.board.config.auth.dto.request.LoginRequestDto;
-import com.test.board.config.auth.service.AuthService;
+import com.test.board.domain.auth.dto.request.LoginRequestDto;
+import com.test.board.domain.auth.service.AuthService;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/admins")

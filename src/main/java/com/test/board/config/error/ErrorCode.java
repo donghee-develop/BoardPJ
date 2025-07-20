@@ -20,6 +20,11 @@ public enum ErrorCode {
     EMPTY_PROFILE_IMAGE("프로필 이미지가 비어 있습니다!", HttpStatus.BAD_REQUEST),
     IMAGE_SAVE_FAIL("이미지 저장에 실패 했습니다!", HttpStatus.INTERNAL_SERVER_ERROR),
 
+    // 메일
+    EMAIL_SEND_FAILED("이메일 전송에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+
+    // 게시판
+    BOARD_NOT_FOUND("해당 게시판을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     // 500 서버
     INTERNAL_SERVER_ERROR("처리하지 못한 예외가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 

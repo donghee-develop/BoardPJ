@@ -1,13 +1,22 @@
 package com.test.board.domain.board.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import com.test.board.config.BaseEntity;
 
 @Entity
 @Table(name = "boards")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Board extends BaseEntity {
-    private String title;
-    private String content;
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false)
+    private Boolean isActive = true;
 }

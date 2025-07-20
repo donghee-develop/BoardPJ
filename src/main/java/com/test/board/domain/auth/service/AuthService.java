@@ -1,4 +1,4 @@
-package com.test.board.config.auth.service;
+package com.test.board.domain.auth.service;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import com.test.board.config.auth.UserPrincipal;
-import com.test.board.config.auth.dto.request.LoginRequestDto;
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
+import com.test.board.domain.auth.UserPrincipal;
+import com.test.board.domain.auth.dto.request.LoginRequestDto;
 import com.test.board.domain.user.entity.User;
 import com.test.board.domain.user.repository.UserRepository;
 
