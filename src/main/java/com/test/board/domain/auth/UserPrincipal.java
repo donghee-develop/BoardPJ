@@ -1,4 +1,4 @@
-package com.test.board.config.auth;
+package com.test.board.domain.auth;
 
 import java.io.Serializable;
 import java.util.Set;

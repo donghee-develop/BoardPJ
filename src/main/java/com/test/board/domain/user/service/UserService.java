@@ -76,6 +76,7 @@ public class UserService {
         return FindEmailResponseDto.from(user.getEmail());
     }
 
+    @Transactional
     public void sendTemporaryPassword(String email) {
         User user =
                 userRepository

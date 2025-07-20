@@ -10,7 +10,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.test.board.config.auth.AuthUser;
+import com.test.board.domain.auth.AuthUser;
 
 @Component
 public class AUthUserArgumentResolver implements HandlerMethodArgumentResolver {

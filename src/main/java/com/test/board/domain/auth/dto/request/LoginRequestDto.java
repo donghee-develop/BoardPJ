@@ -1,4 +1,4 @@
-package com.test.board.config.auth.dto.request;
+package com.test.board.domain.auth.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

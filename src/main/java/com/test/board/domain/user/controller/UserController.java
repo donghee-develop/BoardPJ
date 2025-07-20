@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
-import com.test.board.config.auth.AuthUser;
-import com.test.board.config.auth.UserPrincipal;
+import com.test.board.domain.auth.AuthUser;
+import com.test.board.domain.auth.UserPrincipal;
 import com.test.board.domain.user.dto.request.FindEmailRequestDto;
 import com.test.board.domain.user.dto.request.FindPasswordRequestDto;
 import com.test.board.domain.user.dto.request.SignUpRequestDto;
@@ -18,7 +18,7 @@ import com.test.board.domain.user.service.UserService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
 

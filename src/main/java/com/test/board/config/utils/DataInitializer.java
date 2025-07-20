@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+import com.test.board.domain.board.entity.Board;
+import com.test.board.domain.board.repository.BoardRepository;
 import com.test.board.domain.user.entity.Role;
 import com.test.board.domain.user.entity.User;
 import com.test.board.domain.user.entity.UserBoardRole;
@@ -22,6 +24,7 @@ public class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final UserBoardRoleRepository userBoardRoleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BoardRepository boardRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -53,6 +56,18 @@ public class DataInitializer implements CommandLineRunner {
             UserBoardRole adminRole = UserBoardRole.from(admin, null, superAdminRole);
             userBoardRoleRepository.save(adminRole);
             log.info("슈퍼 관리자 생성");
+        }
+
+        if (boardRepository.count() == 0) { // 이미 있으면 안 만듦
+            Board foodBoard = new Board("음식", true);
+            Board animalBoard = new Board("동물", true);
+            Board gameBoard = new Board("게임", true);
+
+            boardRepository.save(foodBoard);
+            boardRepository.save(animalBoard);
+            boardRepository.save(gameBoard);
+
+            log.info("초기 게시판 3개 생성");
         }
     }
 }
