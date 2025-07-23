@@ -11,7 +11,7 @@ public class GetPostsResponseDto {
     private Long id;
     private String title;
     private String content;
-    private String writerNickname;
+    private String name;
     private LocalDateTime createdAt;
 
     // 생성자, getter, setter 등 생략
@@ -21,7 +21,7 @@ public class GetPostsResponseDto {
         dto.id = post.getId();
         dto.title = post.getTitle();
         dto.content = post.getContent();
-        dto.writerNickname = post.getUser().getName();
+        dto.name = post.getUser().getName();
         dto.createdAt = post.getCreatedAt();
         return dto;
     }
