@@ -15,6 +15,7 @@ import com.test.board.domain.post.dto.response.GetPostsResponseDto;
 import com.test.board.domain.post.dto.response.PageResponse;
 import com.test.board.domain.post.entity.Post;
 import com.test.board.domain.post.entity.QPost;
+import com.test.board.domain.user.entity.QUser;
 
 @RequiredArgsConstructor
 public class PostQueryRepositoryImpl implements PostQueryRepository {
@@ -44,6 +45,8 @@ public class PostQueryRepositoryImpl implements PostQueryRepository {
         List<Post> content =
                 queryFactory
                         .selectFrom(post)
+                        .leftJoin(post.user, QUser.user)
+                        .fetchJoin()
                         .where(builder)
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize())
