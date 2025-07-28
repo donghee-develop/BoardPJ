@@ -12,12 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import lombok.RequiredArgsConstructor;
 
-import com.test.board.config.resolver.AUthUserArgumentResolver;
+import com.test.board.config.resolver.AuthUserArgumentResolver;
 
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
-    private final AUthUserArgumentResolver authUserArgumentResolver;
+    private final AuthUserArgumentResolver authUserArgumentResolver;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

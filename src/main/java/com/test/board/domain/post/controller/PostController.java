@@ -14,6 +14,7 @@ import com.test.board.domain.post.dto.request.GetPostsRequestDto;
 import com.test.board.domain.post.dto.request.PostPostsRequestDto;
 import com.test.board.domain.post.dto.response.GetPostsResponseDto;
 import com.test.board.domain.post.dto.response.PageResponse;
+import com.test.board.domain.post.service.PostLikeService;
 import com.test.board.domain.post.service.PostService;
 
 @RestController
@@ -21,6 +22,7 @@ import com.test.board.domain.post.service.PostService;
 @RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
+    private final PostLikeService postLikeService;
 
     @GetMapping
     public ResponseEntity<PageResponse<GetPostsResponseDto>> getPosts(
@@ -39,6 +41,13 @@ public class PostController {
             @Valid @RequestBody PostPostsRequestDto postPostsRequestDt,
             @AuthUser UserPrincipal userPrincipal) {
         postService.write(postPostsRequestDt, userPrincipal);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{postId}/like")
+    public ResponseEntity<Void> likePost(
+            @PathVariable Long postId, @AuthUser UserPrincipal userPrincipal) {
+        postLikeService.toggleLike(postId, userPrincipal.getId());
         return ResponseEntity.ok().build();
     }
 }

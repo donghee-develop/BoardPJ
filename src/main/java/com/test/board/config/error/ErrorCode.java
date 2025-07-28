@@ -23,8 +23,11 @@ public enum ErrorCode {
     // 메일
     EMAIL_SEND_FAILED("이메일 전송에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
 
-    // 게시판
+    // 보드
     BOARD_NOT_FOUND("해당 게시판을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+
+    // 포스트
+    POST_NOT_FOUND("해당 게시글을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     // 500 서버
     INTERNAL_SERVER_ERROR("처리하지 못한 예외가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 

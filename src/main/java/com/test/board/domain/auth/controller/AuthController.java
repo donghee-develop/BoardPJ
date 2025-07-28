@@ -13,15 +13,13 @@ import lombok.extern.log4j.Log4j2;
 import com.test.board.domain.auth.UserPrincipal;
 import com.test.board.domain.auth.dto.request.LoginRequestDto;
 import com.test.board.domain.auth.service.AuthService;
-import com.test.board.domain.user.repository.UserRepository;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Log4j2
 public class AuthController {
     private final AuthService authService;
-    private final UserRepository userRepository;
 
     @PostMapping("/users/login")
     public ResponseEntity<Void> loginUser(

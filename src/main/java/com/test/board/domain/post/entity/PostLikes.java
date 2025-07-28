@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.test.board.config.BaseEntity;
@@ -13,6 +14,7 @@ import com.test.board.domain.user.entity.User;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
 @Table(
         name = "post_likes",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"post_id", "user_id"})})
@@ -27,4 +29,9 @@ public class PostLikes extends BaseEntity {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime likedAt = LocalDateTime.now();
+
+    public static PostLikes of(Post post, Long userId) {
+        User user = User.builder().id(userId).build();
+        return new PostLikes(post, user, LocalDateTime.now());
+    }
 }

@@ -23,6 +23,6 @@ public class PostPostsRequestDto {
     private Long boardId;
 
     public static Post from(PostPostsRequestDto dto, User user, Board board) {
-        return new Post(dto.getTitle(), dto.getContent(), user, board);
+        return new Post(dto.getTitle(), dto.getContent(), user, board, 0);
     }
 }
