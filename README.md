@@ -9,6 +9,10 @@
 
 권한은 다대다 관계
 
+### 권한 검사
+1. 필터 내 각 URL 체크, 인터셉터를 사용하지 않은 이유 : 로그인 시 권한 정보를 UserPrincipal 객체에 저장 -> DB 조회 없이 현재 세션의 정보를 가져올 수 있기에 Filter에서 검사 시행
+2. UserPrincipal 객체를 통한 각 메소드 별 검사
+
 ## 로그인
 - 사용자가 정보 입력 시 확인 후 UserPrincipal 객체 생성
 - UserPrincipal HttpSession 유저에 저장
@@ -30,4 +34,4 @@
 - postLike 테이블 (로그), post 내 like 변수를 두어 조회 시 select count하지 않도록 설계
 
 ## 포스트 조회수
-- 
+- 고려항 사항 : 반복 조작 방지, 트래픽 몰릴 경우 병목 방지, 동일 유저 아이피 중복 조회 방지

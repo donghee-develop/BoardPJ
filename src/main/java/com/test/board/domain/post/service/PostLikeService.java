@@ -32,16 +32,12 @@ public class PostLikeService {
         Optional<PostLikes> existingLike = postLikeRepository.findByUserIdAndPostId(userId, postId);
 
         if (existingLike.isPresent()) {
-            // 좋아요 취소
             postLikeRepository.delete(existingLike.get());
             post.decrementLikeCount();
-            log.info("decrement -> {}", post.getLikeCount());
-
         } else {
             PostLikes newLike = PostLikes.of(post, userId);
             postLikeRepository.save(newLike);
             post.incrementLikeCount();
-            log.info("increment -> {}", post.getLikeCount());
         }
     }
 }
