@@ -28,6 +28,9 @@ public enum ErrorCode {
 
     // 포스트
     POST_NOT_FOUND("해당 게시글을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+
+    // 파일
+    FILE_UPLOAD_FAILED("파일 업로드에 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
     // 500 서버
     INTERNAL_SERVER_ERROR("처리하지 못한 예외가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 

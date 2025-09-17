@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import com.test.board.config.BaseEntity;
 
@@ -13,6 +14,7 @@ import com.test.board.config.BaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@SuperBuilder
 public class PostFiles extends BaseEntity {
     private String originalName;
     private String savedName;

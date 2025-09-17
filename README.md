@@ -26,7 +26,6 @@
 
 ## 포스트 (각 게시판의 글)
 - QueryDsl 조회 구현, N+1 문제 해결
-- boardId + createdAt 복합 인덱스, userId + createdAt 복합 인덱스 + title 인덱스 사용
 - 좋아요, 조회수 테이블 분리
 
 

@@ -1,10 +1,13 @@
 package com.test.board.domain.post.controller;
 
+import java.util.List;
+
 import jakarta.validation.Valid;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,9 +41,10 @@ public class PostController {
 
     @PostMapping("/write")
     public ResponseEntity<Void> writePost(
-            @Valid @RequestBody PostPostsRequestDto postPostsRequestDt,
+            @Valid @ModelAttribute PostPostsRequestDto postPostsRequestDto,
+            @RequestParam(value = "files", required = false) List<MultipartFile> files,
             @AuthUser UserPrincipal userPrincipal) {
-        postService.write(postPostsRequestDt, userPrincipal);
+        postService.write(postPostsRequestDto, files, userPrincipal);
         return ResponseEntity.ok().build();
     }
 
