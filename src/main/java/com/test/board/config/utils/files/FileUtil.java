@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
-import com.test.board.config.utils.UploadFile;
 
 @Component
 @RequiredArgsConstructor

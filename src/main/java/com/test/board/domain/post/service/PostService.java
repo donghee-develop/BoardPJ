@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
-import com.test.board.config.utils.UploadFile;
+import com.test.board.config.utils.files.UploadFile;
 import com.test.board.config.utils.files.FileUtil;
 import com.test.board.config.utils.files.FileValidator;
 import com.test.board.config.utils.files.FileValidatorFactory;
