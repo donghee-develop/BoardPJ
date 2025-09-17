@@ -13,8 +13,11 @@ import lombok.RequiredArgsConstructor;
 
 import com.test.board.config.error.CustomException;
 import com.test.board.config.error.ErrorCode;
-import com.test.board.config.utils.FileUtil;
 import com.test.board.config.utils.UploadFile;
+import com.test.board.config.utils.files.FileUtil;
+import com.test.board.config.utils.files.FileValidator;
+import com.test.board.config.utils.files.FileValidatorFactory;
+import com.test.board.config.utils.files.ValidationType;
 import com.test.board.domain.auth.UserPrincipal;
 import com.test.board.domain.board.entity.Board;
 import com.test.board.domain.board.repository.BoardRepository;
@@ -37,6 +40,7 @@ public class PostService {
     private final BoardRepository boardRepository;
     private final PostFileRepository postFileRepository;
     private final FileUtil fileUtil;
+    private final FileValidatorFactory fileValidatorFactory;
 
     @Transactional
     public PageResponse<GetPostsResponseDto> getPosts(
@@ -63,6 +67,8 @@ public class PostService {
         Post savedPost = postRepository.save(post);
 
         if (files != null && !files.stream().allMatch(MultipartFile::isEmpty)) {
+            FileValidator validator = fileValidatorFactory.getValidator(ValidationType.POST);
+            validator.validate(files);
             List<UploadFile> uploadedFiles = fileUtil.uploadFiles(files);
             savePostFiles(savedPost, uploadedFiles);
         }
@@ -77,6 +83,7 @@ public class PostService {
                                                 .post(post)
                                                 .originalName(uploadFile.originalFilename())
                                                 .savedName(uploadFile.savedName())
+                                                .path(uploadFile.path())
                                                 .build())
                         .collect(Collectors.toList());
 

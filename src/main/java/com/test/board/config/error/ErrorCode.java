@@ -31,6 +31,13 @@ public enum ErrorCode {
 
     // 파일
     FILE_UPLOAD_FAILED("파일 업로드에 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_MIME_TYPE("해당 타입은 입력할 수 없습니다.", HttpStatus.BAD_REQUEST),
+    INVALID_FILE_EXTENSION("해당 확장자의 파일은 입력할 수 없습니다.", HttpStatus.BAD_REQUEST),
+    INVALID_FILENAME("파일명이 올바르지 않습니다.", HttpStatus.BAD_REQUEST),
+    FILE_SIZE_EXCEEDED("파일 사이즈를 초과하였습니다.", HttpStatus.BAD_REQUEST),
+
+    // VALID
+    VALIDATOR_NOT_FOUND("찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     // 500 서버
     INTERNAL_SERVER_ERROR("처리하지 못한 예외가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 
