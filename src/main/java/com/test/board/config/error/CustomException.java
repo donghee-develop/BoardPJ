@@ -3,6 +3,7 @@ package com.test.board.config.error;
 import lombok.Getter;
 
 @Getter
+// test
 // tt
 public class CustomException extends RuntimeException {
 
